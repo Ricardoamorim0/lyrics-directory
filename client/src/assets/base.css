@@ -19,6 +19,30 @@
   --vt-c-text-light-2: rgba(60, 60, 60, 0.66);
   --vt-c-text-dark-1: var(--vt-c-white);
   --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
+
+  --c-error-light: red;
+  --c-error-dark: red;
+
+  --c-card-form-background-light: #f2f2f2;
+  --c-card-form-background-dark: #121212;
+
+  --c-card-form-shadow-light: #dfdfdf;
+  --c-card-form-shadow-dark: #090909;
+
+  --c-card-form-border-light: #cfcfcf;
+  --c-card-form-border-dark: #212121;
+
+  --c-card-form-submit-background-light: #d5d5d5;
+  --c-card-form-submit-background-dark: #1a1a1a;
+
+  --c-card-form-submit-background-hover-light: #cfcfcf;
+  --c-card-form-submit-background-hover-dark: #252525;
+
+  --c-card-form-submit-background-active-light: #dfdfdf;
+  --c-card-form-submit-background-active-dark: #1f1f1f;
+
+  --c-card-form-submit-border-light: #cfcfcf;
+  --c-card-form-submit-border-dark: #252525;
 }
 
 /* semantic color variables for this project */
@@ -33,7 +57,15 @@
   --color-heading: var(--vt-c-text-light-1);
   --color-text: var(--vt-c-text-light-1);
 
-  --section-gap: 160px;
+  --error: var(--c-error-light);
+
+  --card-form-background: var(--c-card-form-background-light);
+  --card-form-shadow: var(--c-card-form-shadow-light);
+  --card-form-border: var(--c-card-form-border-light);
+  --card-form-submit-background: var(--c-card-form-submit-background-light);
+  --card-form-submit-background-hover: var(--c-card-form-submit-background-hover-light);
+  --card-form-submit-background-active: var(--c-card-form-submit-background-active-light);
+  --card-form-submit-border: var(--c-card-form-submit-border-light);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -47,6 +79,16 @@
 
     --color-heading: var(--vt-c-text-dark-1);
     --color-text: var(--vt-c-text-dark-2);
+
+    --error: var(--c-error-dark);
+
+    --card-form-background: var(--c-card-form-background-dark);
+    --card-form-shadow: var(--c-card-form-shadow-dark);
+    --card-form-border: var(--c-card-form-border-dark);
+    --card-form-submit-background: var(--c-card-form-submit-background-dark);
+    --card-form-submit-background-hover: var(--c-card-form-submit-background-hover-dark);
+    --card-form-submit-background-active: var(--c-card-form-submit-background-active-dark);
+    --card-form-submit-border: var(--c-card-form-submit-border-dark);
   }
 }
 
@@ -54,18 +96,18 @@
 *::before,
 *::after {
   box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+
   margin: 0;
   font-weight: normal;
 }
 
 body {
+  height: 100vh;
   min-height: 100vh;
   color: var(--color-text);
   background: var(--color-background);
-  transition:
-    color 0.5s,
-    background-color 0.5s;
-  line-height: 1.6;
   font-family:
     Inter,
     -apple-system,
@@ -80,7 +122,33 @@ body {
     'Helvetica Neue',
     sans-serif;
   font-size: 15px;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+}
+
+input {
+  color: var(--color-text);
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  transition-delay: 9999s;
+  -o-transition-delay: 9999s;
+  -moz-transition-delay: 9999s;
+  -webkit-transition-delay: 9999s;
+}
+
+form input[type='submit'] {
+  background-color: var(--card-form-submit-background);
+
+  border: var(--card-form-submit-border) 2px solid;
+  border-radius: 1rem;
+}
+
+form input[type='submit']:hover {
+  background-color: var(--card-form-submit-background-hover);
+}
+
+form input[type='submit']:active {
+  background-color: var(--card-form-submit-background-active);
 }
