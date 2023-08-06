@@ -8,9 +8,9 @@ app.use(morgan('combined'));
 app.use(bodyParser.json());
 app.use(cors());
 
-app.get('/status', (req: Request, res: Response) => {
+app.post('/register', (req: Request, res: Response) => {
   res.json({
-    message: 'Server Online'
+    message: 'User have been registered!'
   });
 });
 
