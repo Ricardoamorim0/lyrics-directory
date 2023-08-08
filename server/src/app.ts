@@ -1,17 +1,16 @@
-import express, { Express, Request, Response } from 'express';
+import express, { Express } from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import morgan from 'morgan';
 
+import routes from './routes/routes.js';
+
 const app: Express = express();
+
 app.use(morgan('combined'));
 app.use(bodyParser.json());
 app.use(cors());
 
-app.post('/register', (req: Request, res: Response) => {
-  res.json({
-    message: 'User have been registered!'
-  });
-});
+routes(app);
 
 app.listen(process.env.PORT ||  8081);
