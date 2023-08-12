@@ -32,3 +32,56 @@ div.alert-holder {
 
   padding: 1rem;
 }
+
+
+/*
+/////////////////////
+//Authentication Form
+/////////////////////
+*/
+
+.form-authentication {
+  background-color: var(--card-form-background);
+
+  border-radius: 1rem;
+  border: var(--card-form-border) 2px solid;
+
+  box-shadow: 10px 10px 15px var(--card-form-shadow);
+
+  padding: 2rem;
+
+  max-width: 25rem;
+  width: 100%;
+}
+
+.form-authentication > form {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+}
+
+.form-authentication > form label {
+  margin-top: 1rem;
+}
+
+.form-authentication > form input[type='submit'] {
+  height: 2.5rem;
+  margin-top: 1.5rem;
+}
+
+.form-authentication-holder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.form-authentication hr {
+  margin-top: 1rem;
+}
+
+.form-authentication > form .alert-holder-form {
+  margin: 1rem 0 0 0;
+}

@@ -1,6 +1,6 @@
 <template>
-  <div id="register">
-    <div class="form_authentication">
+  <div class="form-authentication-holder">
+    <div class="form-authentication">
       <h1>Create your account!</h1>
       <hr />
       <form>
@@ -50,52 +50,3 @@ async function register() {
 }
 
 </script>
-
-<style scoped>
-  form {
-    display: flex;
-    flex-direction: column;
-
-    justify-content: center;
-  }
-
-  form label {
-    margin-top: 1rem;
-  }
-
-  form input[type='submit'] {
-    height: 2.5rem;
-    margin-top: 1.5rem;
-  }
-
-  #register {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-  }
-
-  .form_authentication {
-    background-color: var(--card-form-background);
-
-    border-radius: 1rem;
-    border: var(--card-form-border) 2px solid;
-
-    box-shadow: 10px 10px 15px var(--card-form-shadow);
-
-    padding: 2rem;
-
-    max-width: 25rem;
-    width: 100%;
-  }
-
-  .form_authentication hr {
-    margin-top: 1rem;
-  }
-
-  .alert-holder-form {
-    margin: 1rem 0 0 0;
-  }
-
-</style>
