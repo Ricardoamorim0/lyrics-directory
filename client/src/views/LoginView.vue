@@ -5,8 +5,8 @@
       <hr />
       <form>
         <AlertHolder v-if="alert" :text="alertText" class="alert-holder-form"/>
-        <LabelledInput ref="emailInput" type="email" input-name="Email" label="Email" :required="true" autocomplete="email" v-model="email"/>
-        <LabelledInput ref="passwordInput" type="password" input-name="Password" :need-length="true" :max-length="passwordMaxLength" label="Password" :required="true" autocomplete="new-password" v-model="password"/>
+        <LabelledInput ref="emailInput" type="email" input-name="Email" label="Email" :required="true" :need-length="true" :min-length="emailMinLength" :max-length="emailMaxLength" autocomplete="email" v-model="email"/>
+        <LabelledInput ref="passwordInput" type="password" input-name="Password" :need-length="true" :min-length="passwordMinLength" :max-length="passwordMaxLength" label="Password" :required="true" autocomplete="new-password" v-model="password"/>
         
         <input type="submit" name="submit" id="login_submit" value="Login" @click.stop.prevent="login"/>
       </form>
@@ -18,6 +18,7 @@
 <script setup lang="ts">
 import AlertHolder from '@/components/AlertHolder.vue';
 import LabelledInput from '@/components/LabelledInput.vue';
+import constants from '@/constants/constants';
 import AuthenticationService from '@/services/AuthenticationService';
 
 import { ref } from 'vue';
@@ -28,7 +29,11 @@ const password = ref('');
 const alert = ref(false);
 const alertText = ref('');
 
-const passwordMaxLength = 50;
+const emailMinLength = constants.MIN_EMAIL_LENGTH;
+const passwordMinLength = constants.MIN_PASSWORD_LENGTH;
+
+const emailMaxLength = constants.MAX_EMAIL_LENGTH;
+const passwordMaxLength = constants.MAX_PASSWORD_LENGTH;
 
 const emailInput = ref<InstanceType<typeof LabelledInput> | null>(null);
 const passwordInput = ref<InstanceType<typeof LabelledInput> | null>(null);
@@ -36,7 +41,7 @@ const passwordInput = ref<InstanceType<typeof LabelledInput> | null>(null);
 async function login() {
   if (email.value.length === 0 || password.value.length === 0) {
     emailInput.value?.focus();
-  } else if (password.value.length > passwordMaxLength) {
+  } else if (password.value.length > passwordMaxLength || password.value.length < passwordMinLength) {
     passwordInput.value?.focus();
   } else {
     const response = await AuthenticationService.login({ email: email.value, password: password.value });
