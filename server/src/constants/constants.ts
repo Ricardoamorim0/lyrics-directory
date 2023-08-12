@@ -12,7 +12,7 @@ export default {
   MIN_PASSWORD_LENGTH: Number(process.env.MIN_PASSWORD_LENGTH || 5),
 
   MAX_NAME_LENGTH: Number(process.env.MAX_NAME_LENGTH || 50),
-  MAX_EMAIL_LENGTH: Number(process.env.MAX_EMAIL_LENGTH || 150),
+  MAX_EMAIL_LENGTH: Number(process.env.MAX_EMAIL_LENGTH || 320),
   MAX_PASSWORD_LENGTH: Number(process.env.MAX_PASSWORD_LENGTH || 50),
 
 
