@@ -1,13 +1,15 @@
 <template>
   <div class="alert-holder">
-    <p>{{ text }}</p>
+    <p>{{ title }}</p>
+    <p>{{ message }}</p>
   </div>
 </template>
 
 <script setup lang="ts">
 
 defineProps<{
-  text: string
+  title: string
+  message: string
 }>();
 
 </script>
