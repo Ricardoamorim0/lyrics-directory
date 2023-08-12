@@ -20,6 +20,7 @@ import AlertHolder from '@/components/AlertHolder.vue';
 import LabelledInput from '@/components/LabelledInput.vue';
 import constants from '@/constants/constants';
 import AuthenticationService from '@/services/AuthenticationService';
+import LocalStorage from '@/services/LocalStorage';
 
 import { ref } from 'vue';
 
@@ -46,7 +47,11 @@ async function login() {
     passwordInput.value?.focus();
   } else {
     try {
-      await AuthenticationService.login({ email: email.value, password: password.value });
+      const response = await AuthenticationService.login({ email: email.value, password: password.value });
+
+      LocalStorage.set(LocalStorage.Keys.USER, `{ id: ${response.data.user.id}, name: ${response.data.user.name}, email: ${response.data.user.email} }`);
+      LocalStorage.set(LocalStorage.Keys.TOKEN, response.data.token);
+      
       location.pathname = '';
     } catch (error: any) {
       alertTitle.value = error.response.data.title;

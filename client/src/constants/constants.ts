@@ -6,6 +6,10 @@ export default {
 
   MAX_NAME_LENGTH: 50,
   MAX_EMAIL_LENGTH: 320,
-  MAX_PASSWORD_LENGTH: 50
+  MAX_PASSWORD_LENGTH: 50,
+
+  // Local Storage
+  USER: 'user',
+  TOKEN: 'jwt_token'
   
 };

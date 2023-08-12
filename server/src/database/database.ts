@@ -21,7 +21,7 @@ async function createUser(name: string, email: string, password: string): Promis
 }
 
 async function isUserPassword(email: string, password: string): Promise<{ userExist: boolean, result: boolean, data: { id: number, name: string, email: string } }> {
-  const queryResult = await client.query('SELECT password FROM users WHERE email=$1 LIMIT 1;', [email]);
+  const queryResult = await client.query('SELECT * FROM users WHERE email=$1 LIMIT 1;', [email]);
 
   if (queryResult.rowCount <= 0) return { userExist: false, result: false, data: { id: -1, name: '', email: ''}};
 
