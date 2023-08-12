@@ -21,12 +21,12 @@ export default {
     'unknown': 'Unknown Error',
 
     // Database
-    'db_0': 'Incorrect data format',
+    'db_0': 'Incorrect data format. Try again.',
 
     // Database - Create User
-    'db_cu_0': 'User already exists',
+    'db_cu_0': 'User already exists. If it\'s not you, try a different email.',
 
     // Database - Login User
-    'db_lu_0': 'Incorrect email or password'
+    'db_lu_0': 'Incorrect email or password. Your password or email don\'t match with our database.'
   } as { [key: string]: string; }
 };
