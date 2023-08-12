@@ -4,7 +4,7 @@
       <h1>Enter in your account!</h1>
       <hr />
       <form>
-        <AlertHolder v-if="alert" :text="alertText" class="alert-holder-form"/>
+        <AlertHolder v-if="alert" :title="alertTitle" :message="alertMessage" class="alert-holder-form"/>
         <LabelledInput ref="emailInput" type="email" input-name="Email" label="Email" :required="true" :need-length="true" :min-length="emailMinLength" :max-length="emailMaxLength" autocomplete="email" v-model="email"/>
         <LabelledInput ref="passwordInput" type="password" input-name="Password" :need-length="true" :min-length="passwordMinLength" :max-length="passwordMaxLength" label="Password" :required="true" autocomplete="new-password" v-model="password"/>
         
@@ -27,7 +27,8 @@ const email = ref('');
 const password = ref('');
 
 const alert = ref(false);
-const alertText = ref('');
+const alertTitle = ref('');
+const alertMessage = ref('');
 
 const emailMinLength = constants.MIN_EMAIL_LENGTH;
 const passwordMinLength = constants.MIN_PASSWORD_LENGTH;
@@ -39,19 +40,18 @@ const emailInput = ref<InstanceType<typeof LabelledInput> | null>(null);
 const passwordInput = ref<InstanceType<typeof LabelledInput> | null>(null);
   
 async function login() {
-  if (email.value.length === 0 || password.value.length === 0) {
+  if (email.value.length === 0 || email.value.length > emailMaxLength || email.value.length < emailMinLength) {
     emailInput.value?.focus();
-  } else if (password.value.length > passwordMaxLength || password.value.length < passwordMinLength) {
+  } else if (password.value.length === 0 || password.value.length > passwordMaxLength || password.value.length < passwordMinLength) {
     passwordInput.value?.focus();
   } else {
-    const response = await AuthenticationService.login({ email: email.value, password: password.value });
-    if (response.data.success !== undefined) {
-      if (response.data.success) {
-        alertText.value = response.data.message;
-        alert.value = true;
-      } else {
-        location.pathname = '';
-      }
+    try {
+      await AuthenticationService.login({ email: email.value, password: password.value });
+      location.pathname = '';
+    } catch (error: any) {
+      alertTitle.value = error.response.data.title;
+      alertMessage.value = error.response.data.message;
+      alert.value = true;
     }
   }
 }

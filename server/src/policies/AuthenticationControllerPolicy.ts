@@ -3,7 +3,7 @@ import Joi from 'joi';
 import constants from '../constants/constants.js';
 
 const RegisterSchema = Joi.object({
-  name: Joi.string().min(constants.MIN_NAME_LENGTH).max(constants.MAX_NAME_LENGTH).alphanum().required(),
+  name: Joi.string().min(constants.MIN_NAME_LENGTH).max(constants.MAX_NAME_LENGTH).pattern(new RegExp('^[a-zA-Z ]+$')).required(),
   email: Joi.string().min(constants.MIN_EMAIL_LENGTH).max(constants.MAX_EMAIL_LENGTH).email().required(),
   password: Joi.string().min(constants.MIN_PASSWORD_LENGTH).max(constants.MAX_PASSWORD_LENGTH).required()
 });
