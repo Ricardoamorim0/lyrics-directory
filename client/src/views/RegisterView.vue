@@ -11,6 +11,7 @@
         
         <input type="submit" name="submit" id="register_submit" value="Register" @click.stop.prevent="register"/>
       </form>
+      <p>If you already have an account, <a href="/login">try log in!</a></p>
     </div>
   </div>
 </template>

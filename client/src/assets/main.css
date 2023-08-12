@@ -78,8 +78,13 @@ div.alert-holder {
   height: 100%;
 }
 
-.form-authentication hr {
+.form-authentication hr, .form-authentication p {
   margin-top: 1rem;
+  text-align: center
+}
+
+.form-authentication h1, .form-authentication p {
+  text-align: center;
 }
 
 .form-authentication > form .alert-holder-form {
