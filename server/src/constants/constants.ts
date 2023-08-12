@@ -14,4 +14,7 @@ export default {
   MAX_NAME_LENGTH: Number(process.env.MAX_NAME_LENGTH || 50),
   MAX_EMAIL_LENGTH: Number(process.env.MAX_EMAIL_LENGTH || 320),
   MAX_PASSWORD_LENGTH: Number(process.env.MAX_PASSWORD_LENGTH || 50),
+
+  JWT_TOKEN_EXPIRE: 60 * 60 * 24 * 7, // 1 week
+  JWT_TOKEN_SECRET: process.env.JWT_TOKEN_SECRET || 'notfound'
 };

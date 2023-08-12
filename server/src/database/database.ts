@@ -20,12 +20,13 @@ async function createUser(name: string, email: string, password: string): Promis
   return { userExist: false };
 }
 
-async function isUserPassword(email: string, password: string): Promise<{ userExist: boolean, result: boolean, email: string }> {
+async function isUserPassword(email: string, password: string): Promise<{ userExist: boolean, result: boolean, data: { id: number, name: string, email: string } }> {
   const queryResult = await client.query('SELECT password FROM users WHERE email=$1 LIMIT 1;', [email]);
 
-  if (queryResult.rowCount <= 0) return { userExist: false, result: false, email: ''};
+  if (queryResult.rowCount <= 0) return { userExist: false, result: false, data: { id: -1, name: '', email: ''}};
 
-  return { userExist: true, result: await bcrypt.compare(password, queryResult.rows[0].password).then((result) => result), email: queryResult.rows[0].email};
+  return { userExist: true, result: await bcrypt.compare(password, queryResult.rows[0].password)
+    .then((result) => result), data: { id: queryResult.rows[0].id, name: queryResult.rows[0].name, email: queryResult.rows[0].email }};
 }
 
 async function checkIfUserExists(email: string): Promise<boolean> {
