@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, toRef } from 'vue';
+import { computed, onMounted, ref, toRef } from 'vue';
 
 const props = withDefaults(defineProps<{
   inputName: string,
@@ -66,6 +66,12 @@ function focus(): void {
 function handleInput(event: Event): void {
   emit('update:modelValue', (event.target as HTMLInputElement).value);
 }
+
+onMounted(() => {
+  setTimeout(() => {
+    emit('update:modelValue', input.value?.value || '');
+  }, 1);
+});
 
 defineExpose({ focus });
 
