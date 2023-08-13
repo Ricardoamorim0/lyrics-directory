@@ -8,6 +8,9 @@ export default {
 
   login(credentials: { email: string, password: string }) {
     return Api().post('login', credentials);
-  }
+  },
 
+  auth(token: string) {
+    return Api().post('auth', { token: token });
+  }
 };

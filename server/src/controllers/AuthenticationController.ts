@@ -55,5 +55,9 @@ export default {
         });
       });
 
+  },
+
+  async auth (req: Request, res: Response) {
+    res.status(200).json({});
   }
 };

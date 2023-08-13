@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import Joi from 'joi';
+import jwt from 'jsonwebtoken';
 import constants from '../constants/constants.js';
 
 const RegisterSchema = Joi.object({
@@ -78,6 +79,18 @@ export default {
     } else {
       next();
     }
+  },
+
+  async auth (req: Request, res: Response, next: () => void) {
+    jwt.verify(req.body.token, constants.JWT_TOKEN_SECRET, { ignoreExpiration: false }, (error) => {
+      if (error) {
+        res.status(401).json({
+          message: error.message
+        });
+      } else {
+        next();
+      }
+    });
   }
 
 };

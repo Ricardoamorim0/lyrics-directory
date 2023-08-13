@@ -14,5 +14,6 @@ export default (app: Express, client: PoolClient) => {
   // Routes
   app.post('/register', AuthenticationControllerPolicy.register, AuthenticationController.register);
   app.post('/login', AuthenticationControllerPolicy.login, AuthenticationController.login);
+  app.post('/auth', AuthenticationControllerPolicy.auth, AuthenticationController.auth);
 
 };
