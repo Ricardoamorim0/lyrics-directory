@@ -17,11 +17,21 @@ const router = createRouter({
     {
       path: '/register',
       name: 'register',
+      beforeEnter: () => {
+        if (StorageService.getUserLoggedIn()) {
+          return '/';
+        }
+      },
       component: RegisterView
     },
     {
       path: '/login',
       name: 'login',
+      beforeEnter: () => {
+        if (StorageService.getUserLoggedIn()) {
+          return '/';
+        }
+      },
       component: LoginView
     }, 
     {
