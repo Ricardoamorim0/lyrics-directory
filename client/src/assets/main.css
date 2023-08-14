@@ -7,6 +7,12 @@
   font-weight: normal;
 }
 
+@media screen and (max-width: 275px) {
+  :root {
+    font-size: 0.75rem;
+  }
+}
+
 a,
 .green {
   text-decoration: none;
@@ -14,10 +20,23 @@ a,
   transition: 0.4s;
 }
 
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
+a:hover {
+  background-color: hsla(160, 100%, 37%, 0.2);
+}
+
+button {
+  border: var(--card-form-border) 2px solid;
+  background-color: hsla(160, 100%, 37%, 0.2);
+  color: var(--color-text);
+  transition: 0.4s;
+}
+
+button:hover {
+  background-color: hsla(160, 100%, 37%, 0.1);
+}
+
+button:active {
+  background-color: hsla(160, 100%, 37%, 0.3);
 }
 
 .overflow {
@@ -91,6 +110,7 @@ div.alert-holder {
   margin: 1rem 0 0 0;
 }
 
+
 /*
 /////////////////
 // Labelled Input
@@ -98,34 +118,40 @@ div.alert-holder {
 */
 
 .input-container {
+  display: flex;
+
   margin-top: 1rem;
   height: 3rem;
 }
 
-.input-container > input {
+.input-container > div {
+  width: 100%;
+  height: inherit;
+}
+
+.input-container > div > input {
   height: inherit;
   padding: 1rem 0.5rem 0 0.5rem;
 
   position: relative;
 
-  width: 100%;
+  width: inherit;
   
   background: transparent;
   color: var(--color-text);
 
   border: var(--card-form-border) 2px solid;
-  border-radius: 0.25rem;
 
   z-index: 2;
 }
 
-.input-container > input:focus ~ .input-container-details,
-.input-container > input:not(:focus) ~ .input-container-details.not-hide {
+.input-container > div > input:focus ~ .input-container-details,
+.input-container > div > input:not(:focus) ~ .input-container-details.not-hide {
   bottom: 2.9rem;
   font-size: 0.8em;
 }
 
-.input-container > input:not(:focus) ~ .input-container-details:not(.not-hide) :nth-child(2) {
+.input-container > div > input:not(:focus) ~ .input-container-details:not(.not-hide) :nth-child(2) {
   opacity: 0;
 }
 
@@ -158,4 +184,64 @@ div.alert-holder {
   user-select: none;
   -moz-user-select: none;
   -webkit-user-select: none;
+}
+
+.input-from-container-round {
+  border-radius: 0.25rem;
+}
+
+.input-from-container-round-right {
+  border-radius: 0 0.25rem 0.25rem 0;
+  border-left: none; 
+}
+
+.input-from-container-round-left {
+  border-radius: 0.25rem 0 0 0.25rem;
+}
+
+
+/*
+/////////////////
+// Navigation Bar
+/////////////////
+*/
+
+.navigation-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  margin: 1rem;
+  align-items: center;
+}
+
+.navigation-bar a {
+  padding: 0.5rem;
+  border-radius: 1rem;
+  white-space: nowrap;
+}
+
+.navigation-bar > a {
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.navigation-bar > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+
+@media screen and (max-width: 600px) {
+  .navigation-bar {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .navigation-bar > div {
+    flex-direction: column;
+  }
 }

@@ -18,6 +18,10 @@ export default {
     LocalStorage.set(Keys.USER_LOGGED_IN, value);
   },
 
+  getUser(): { id: number, name: string, email: string } {
+    const user = LocalStorage.getString(Keys.USER);
+    return user ? JSON.parse(user) : { id: -1, name: '', email: '' };
+  },
   getToken(): string {
     return LocalStorage.getString(Keys.TOKEN) || '';
   },

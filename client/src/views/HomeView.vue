@@ -1,28 +1,38 @@
 <template>
-   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-    <p v-if="userLoggedIn">User logged in!</p>
-  </header>
+  <div>
+    <div class="form-authentication-holder">
+      <div class="form-authentication">
+        <h1>Search your lyrics!</h1>
+        <hr />
+        <form>
+          <LabelledInput 
+          ref="seacrhInput" 
+          type="text" 
+          input-name="Write a song name" 
+          label="Search" 
+          :required="false" 
+          :need-length="false" 
+          autocomplete="search" 
+          :search-button="true"
+          v-model="searchValue"
+          @submit="console.log(searchValue)"
+          />
+        </form>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
-import StorageService from '@/services/StorageService';
-import { computed } from 'vue';
+import LabelledInput from '@/components/LabelledInput.vue';
+import { ref } from 'vue';
 
-
-const userLoggedIn = computed(() => StorageService.getUserLoggedIn());
+const searchValue = ref('');
 
 </script>
 
 <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
+
 
 </style>

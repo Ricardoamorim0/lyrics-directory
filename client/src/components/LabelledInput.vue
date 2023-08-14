@@ -1,13 +1,16 @@
 <template>
   <div class="input-container">
-    <input ref="input" :type="type" :maxlength="maxLength" :required="required" :aria-required="required" :aria-label="label" :autocomplete="autocomplete" @input="handleInput"/>
-    <div class="input-container-details" :class="{'not-hide': haveText}">
-      <span>{{ inputName }}</span>
-      <span v-if="needLength">
-        <span :class="{'overflow': (overflow || underflow)}">{{ currentLength + ' / ' + maxLength }}</span>
-        <span v-if="(overflow || underflow)"> ⚠️</span>
-      </span>
+    <div>
+      <input ref="input" :type="type" :class="{'input-from-container-round': !searchButton, 'input-from-container-round-left': searchButton}" :maxlength="maxLength" :required="required" :aria-required="required" :aria-label="label" :autocomplete="autocomplete" @input="handleInput"/>
+      <div class="input-container-details" :class="{'not-hide': haveText}">
+        <span>{{ inputName }}</span>
+        <span v-if="needLength">
+          <span :class="{'overflow': (overflow || underflow)}">{{ currentLength + ' / ' + maxLength }}</span>
+          <span v-if="(overflow || underflow)"> ⚠️</span>
+        </span>
+      </div>
     </div>
+    <button v-if="searchButton" class="input-from-container-round-right" value="submit" @click.stop.prevent="handleClick">Search</button>
   </div>
 </template>
 
@@ -23,17 +26,20 @@ const props = withDefaults(defineProps<{
   minLength?: number,
   maxLength?: number,
   required?: boolean,
-  autocomplete?: string
+  autocomplete?: string,
+  searchButton?: boolean
 }>(), {
   modelValue: '',
   needLength: false,
   minLength: 0,
   maxLength: 50,
-  required: false
+  required: false,
+  searchButton: false
 });
 
 const emit = defineEmits<{
-  (e: 'update:modelValue', value: string): void
+  (e: 'update:modelValue', value: string): void,
+  (e: 'submit'): void
 }>();
 
 const value = toRef(props, 'modelValue');
@@ -65,6 +71,10 @@ function focus(): void {
 
 function handleInput(event: Event): void {
   emit('update:modelValue', (event.target as HTMLInputElement).value);
+}
+
+function handleClick(): void {
+  emit('submit');
 }
 
 onMounted(() => {

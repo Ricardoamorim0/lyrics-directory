@@ -49,7 +49,7 @@ async function login() {
     try {
       const response = await AuthenticationService.login({ email: email.value, password: password.value });
 
-      StorageService.setUser(`{ id: ${response.data.user.id}, name: ${response.data.user.name}, email: ${response.data.user.email} }`);
+      StorageService.setUser(`{ "id": "${response.data.user.id}", "name": "${response.data.user.name}", "email": "${response.data.user.email}" }`);
       StorageService.setToken(response.data.token);
       StorageService.setUserLoggedIn(true);
       

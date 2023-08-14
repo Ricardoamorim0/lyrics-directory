@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import HomeView from '../views/HomeView.vue';
 import RegisterView from '../views/RegisterView.vue';
 import LoginView from '../views/LoginView.vue';
+import ProfileView from '../views/ProfileView.vue';
 import LogoutView from '../views/LogoutView.vue';
 import StorageService from '@/services/StorageService';
 import AuthenticationService from '@/services/AuthenticationService';
@@ -33,6 +34,16 @@ const router = createRouter({
         }
       },
       component: LoginView
+    }, 
+    {
+      path: '/profile',
+      name: 'profile',
+      beforeEnter: () => {
+        if (!StorageService.getUserLoggedIn()) {
+          return '/login';
+        }
+      },
+      component: ProfileView
     }, 
     {
       path: '/logout',
